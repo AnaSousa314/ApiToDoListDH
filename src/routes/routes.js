@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
+const TaskController = require('../controller/TaskController');
+
 // outra forma
 
 /* 
@@ -9,8 +11,16 @@ const router = Router();
 
 */
 
-router.get('/', (req,res)=>{
-  res.send('Hello World!');
-})
+router.post('/api/task/create',TaskController.create);
 
-module.exports = router
+router.get('/api/task/list',TaskController.index);
+
+router.get('/api/task/:id',TaskController.getById);
+
+router.put('/api/task/update/:id', TaskController.updated);
+
+router.delete('/api/task/delete/:id', TaskController.deleted);
+
+router.use(TaskController.error)
+
+module.exports = router;
